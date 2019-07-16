@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { auth } from '../../firebase/firebase.utils';
 import './Header.scss';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 
-const Header = props => {
+const Header = ({ currentUser }) => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -19,9 +20,15 @@ const Header = props => {
         <NavLink to="/contact" className="option" activeClassName="active">
           Contact
         </NavLink>
-        <NavLink to="/signin" className="option" activeClassName="active">
-          Sign In
-        </NavLink>
+        {currentUser ? (
+          <div className="option" onClick={() => auth.signOut()}>
+            Sign Out
+          </div>
+        ) : (
+          <NavLink to="/signin" className="option" activeClassName="active">
+            Sign In
+          </NavLink>
+        )}
       </div>
     </div>
   );
