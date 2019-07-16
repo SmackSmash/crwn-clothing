@@ -10,14 +10,17 @@ const Header = props => {
         <Logo className="logo" />
       </Link>
       <div className="options">
-        <NavLink to="/" className="option" activeClass="active">
+        <NavLink to="/" className="option" activeClassName="active">
           Home
         </NavLink>
-        <NavLink to="/shop" className="option" activeClass="active">
+        <NavLink to="/shop" className="option" activeClassName="active">
           Shop
         </NavLink>
-        <NavLink to="/contact" className="option" activeClass="active">
+        <NavLink to="/contact" className="option" activeClassName="active">
           Contact
+        </NavLink>
+        <NavLink to="/signin" className="option" activeClassName="active">
+          Sign In
         </NavLink>
       </div>
     </div>
