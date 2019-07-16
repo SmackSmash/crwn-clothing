@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.scss';
 import Homepage from './pages/homepage/Homepage';
-import Hats from './pages/about/About';
+import Shop from './pages/shop/Shop';
 
 const App = props => (
   <BrowserRouter>
     <Link to="/">Home</Link>
-    <Link to="/hats">Hats</Link>
+    <Link to="/shop">Shop</Link>
     <Route path="/" exact component={Homepage} />
-    <Route path="/hats" component={Hats} />
+    <Route path="/shop" component={Shop} />
   </BrowserRouter>
 );
 
