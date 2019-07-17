@@ -20,10 +20,8 @@ const App = props => {
             ...snapShot.data()
           });
         });
-        console.log(currentUser.id);
       } else {
         setUser({});
-        console.log(currentUser.id);
       }
     });
     return () => {
