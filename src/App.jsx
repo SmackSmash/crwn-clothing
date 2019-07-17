@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setCurrentUser } from './actions';
 import './App.scss';
 import Header from './components/header/Header';
 import Homepage from './pages/homepage/Homepage';
@@ -7,31 +9,29 @@ import Shop from './pages/shop/Shop';
 import SignInSignUp from './pages/sign-in-sign-up/SignInSignUp';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
-const App = props => {
-  const [currentUser, setUser] = useState({});
-
+const App = ({ setCurrentUser }) => {
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot(snapShot => {
-          setUser({
+          setCurrentUser({
             id: snapShot.id,
             ...snapShot.data()
           });
         });
       } else {
-        setUser({});
+        setCurrentUser({});
       }
     });
     return () => {
       unsubscribeFromAuth();
     };
-  }, [currentUser.id]);
+  });
 
   return (
     <BrowserRouter>
-      <Header currentUser={currentUser} />
+      <Header />
       <Route path="/" exact component={Homepage} />
       <Route path="/shop" component={Shop} />
       <Route path="/signin" component={SignInSignUp} />
@@ -39,4 +39,7 @@ const App = props => {
   );
 };
 
-export default App;
+export default connect(
+  null,
+  { setCurrentUser }
+)(App);
