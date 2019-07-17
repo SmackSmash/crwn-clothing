@@ -20,7 +20,7 @@ const Header = ({ currentUser }) => {
         <NavLink to="/contact" className="option" activeClassName="active">
           Contact
         </NavLink>
-        {currentUser ? (
+        {currentUser.id ? (
           <div className="option" onClick={() => auth.signOut()}>
             Sign Out
           </div>

@@ -5,20 +5,31 @@ import Header from './components/header/Header';
 import Homepage from './pages/homepage/Homepage';
 import Shop from './pages/shop/Shop';
 import SignInSignUp from './pages/sign-in-sign-up/SignInSignUp';
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 const App = props => {
-  const [currentUser, setUser] = useState(null);
+  const [currentUser, setUser] = useState({});
 
   useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      setUser(user);
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          setUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          });
+        });
+        console.log(currentUser.id);
+      } else {
+        setUser({});
+        console.log(currentUser.id);
+      }
     });
-    console.log(currentUser);
     return () => {
       unsubscribeFromAuth();
     };
-  }, [currentUser]);
+  }, [currentUser.id]);
 
   return (
     <BrowserRouter>
