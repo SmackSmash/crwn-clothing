@@ -4,8 +4,7 @@ import { addItem } from '../../actions';
 import CustomButton from '../custom-button/CustomButton';
 import './CollectionItem.scss';
 
-const CollectionItem = ({ item, addItem }) => {
-  const { name, price, imageUrl } = item;
+const CollectionItem = ({ item, item: { name, price, imageUrl }, addItem }) => {
   return (
     <div className="collection-item">
       <div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
