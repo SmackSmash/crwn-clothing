@@ -11,6 +11,11 @@ export const selectCartItems = createSelector(
   cart => cart.cartItems
 );
 
+export const selectCartHidden = createSelector(
+  [selectCart],
+  cart => cart.hidden
+);
+
 // Memozie an operation performed on the aforementioned subset
 // THESE ARE FUNCTIONS THAT ARE IMPORTED AND CALLED IN
 // mapStateToProps WITH THE CURRENT STATE!!!!
@@ -19,5 +24,13 @@ export const selectCartItemsCount = createSelector(
   cartItems =>
     cartItems.reduce((acc, item) => {
       return acc + item.quantity;
+    }, 0)
+);
+
+export const selectCartTotal = createSelector(
+  [selectCartItems],
+  cartItems =>
+    cartItems.reduce((acc, item) => {
+      return acc + item.quantity * item.price;
     }, 0)
 );

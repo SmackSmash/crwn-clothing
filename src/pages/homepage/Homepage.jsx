@@ -1,6 +1,6 @@
 import React from 'react';
-import './Homepage.scss';
 import Directory from '../../components/directory/Directory';
+import './Homepage.scss';
 
 const Homepage = props => {
   document.title = 'CRWN :: Clothing | Home';

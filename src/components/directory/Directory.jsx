@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Directory.scss';
 import MenuItem from '../menu-item/MenuItem';
+import './Directory.scss';
 
 class Directory extends Component {
   state = {

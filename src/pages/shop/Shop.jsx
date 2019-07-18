@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import data from './shop.data';
 import CollectionPreview from '../../components/collection-preview/CollectionPreview';
+import './Shop.scss';
 
 class Shop extends Component {
   state = {
