@@ -6,7 +6,7 @@ const CartDropdown = props => {
   return (
     <div className="cart-dropdown">
       <div className="cart-items" />
-      <CustomButton>Go To Checkout</CustomButton>
+      <CustomButton inverted>Go To Checkout</CustomButton>
     </div>
   );
 };
