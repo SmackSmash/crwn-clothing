@@ -6,3 +6,9 @@ export const setCurrentUser = user => {
     payload: user
   };
 };
+
+export const toggleCartHidden = () => {
+  return {
+    type: actionTypes.TOGGLE_CART_HIDDEN
+  };
+};
