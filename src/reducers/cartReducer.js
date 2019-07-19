@@ -39,6 +39,6 @@ export default (state = INITIAL_STATE, action) => {
     case actionTypes.CLEAR_ITEM_FROM_CART:
       return { ...state, cartItems: clearItemFromCart(state.cartItems, action.payload) };
     default:
-      return { ...state };
+      return state;
   }
 };
