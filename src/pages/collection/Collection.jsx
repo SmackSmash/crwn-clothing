@@ -5,6 +5,7 @@ import CollectionItem from '../../components/collection-item/CollectionItem';
 import './Collection.scss';
 
 const Collection = ({ collection: { title, items } }) => {
+  document.title = `CRWN :: Clothing | ${title}`;
   return (
     <div className="collection-page">
       <h1 className="title">{title}</h1>

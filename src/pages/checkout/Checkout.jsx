@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCartItems, selectCartTotal } from '../../selectors/cartSelectors';
 import CheckoutItem from '../../components/checkout-item/CheckoutItem';
+import StripeButton from '../../components/stripe-button/StripeButton';
 import './Checkout.scss';
 
 const Checkout = ({ cartItems, total }) => {
+  document.title = 'CRWN :: Clothing | Checkout';
   return (
     <div className="checkout-page">
       <div className="checkout-header">
@@ -31,6 +33,12 @@ const Checkout = ({ cartItems, total }) => {
       <div className="total">
         <span>Total: &pound;{total}</span>
       </div>
+      <div className="test-warning">
+        <span>4242 4242 4242 4242</span>
+        <br />
+        <span>Exp: 01/20 --- CW: 123</span>
+      </div>
+      <StripeButton price={total} />
     </div>
   );
 };
