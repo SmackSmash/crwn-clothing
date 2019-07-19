@@ -4,12 +4,15 @@ import { selectCollection } from '../../selectors/shopSelector';
 import CollectionItem from '../../components/collection-item/CollectionItem';
 import './Collection.scss';
 
-const Collection = ({ match, collection }) => {
-  console.log(match.params.collectionId);
-  console.log(collection);
+const Collection = ({ collection: { title, items } }) => {
   return (
     <div className="collection-page">
-      <h1 className="title">Collection Page</h1>
+      <h1 className="title">{title}</h1>
+      <div className="items">
+        {items.map(item => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };
