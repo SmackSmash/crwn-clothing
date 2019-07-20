@@ -1,15 +1,14 @@
 import React from 'react';
+import * as S from './Homepage.styled';
 import Directory from '../../components/directory/Directory';
-import './Homepage.scss';
 
 const Homepage = props => {
   document.title = 'CRWN :: Clothing | Home';
+
   return (
-    <div className="homepage">
-      <div className="directory-menu">
-        <Directory />
-      </div>
-    </div>
+    <S.Homepage>
+      <Directory />
+    </S.Homepage>
   );
 };
 

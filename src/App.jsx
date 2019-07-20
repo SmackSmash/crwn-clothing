@@ -42,7 +42,7 @@ const App = ({ setCurrentUser, currentUser }) => {
         exact
         render={() => (currentUser.id ? <Redirect to="/" /> : <SignInSignUp />)}
       />
-      <Route path="/checkout" component={Checkout} />
+      <Route path="/checkout" exact component={Checkout} />
     </BrowserRouter>
   );
 };
