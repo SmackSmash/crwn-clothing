@@ -4,42 +4,42 @@ import { createStructuredSelector } from 'reselect';
 import { selectCartItems, selectCartTotal } from '../../selectors/cartSelectors';
 import CheckoutItem from '../../components/checkout-item/CheckoutItem';
 import StripeButton from '../../components/stripe-button/StripeButton';
-import './Checkout.scss';
+import * as S from './Checkout.styled';
 
 const Checkout = ({ cartItems, total }) => {
   document.title = 'CRWN :: Clothing | Checkout';
   return (
-    <div className="checkout-page">
-      <div className="checkout-header">
-        <div className="header-block">
+    <S.CheckoutPage>
+      <S.CheckoutHeader>
+        <S.HeaderBlock>
           <span>Product</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Description</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Quantity</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Price</span>
-        </div>
-        <div className="header-block">
+        </S.HeaderBlock>
+        <S.HeaderBlock>
           <span>Remove</span>
-        </div>
-      </div>
+        </S.HeaderBlock>
+      </S.CheckoutHeader>
       {cartItems.map(item => (
         <CheckoutItem key={item.id} item={item} />
       ))}
-      <div className="total">
+      <S.Total>
         <span>Total: &pound;{total}</span>
-      </div>
-      <div className="test-warning">
+      </S.Total>
+      <S.TestWarning>
         <span>4242 4242 4242 4242</span>
         <br />
         <span>Exp: 01/20 --- CW: 123</span>
-      </div>
+      </S.TestWarning>
       <StripeButton price={total} />
-    </div>
+    </S.CheckoutPage>
   );
 };
 

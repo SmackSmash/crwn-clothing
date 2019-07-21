@@ -1,6 +1,5 @@
 import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
-import './StripeButton.scss';
 
 const StripeButton = ({ price }) => {
   const PUBLISHABLE_KEY = 'pk_test_cuPBr793HwGLujiDVIMhv8GF00dBp7FriS';

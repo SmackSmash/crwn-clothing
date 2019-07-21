@@ -4,9 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { selectCartItems } from '../../selectors/cartSelectors';
 import CartItem from '../cart-item/CartItem';
-import CustomButton from '../custom-button/CustomButton';
 import { toggleCartHidden } from '../../actions';
-import './CartDropdown.scss';
+import * as S from './CartDropdown.styled';
 
 const CartDropdown = ({ cartItems, history, dispatch }) => {
   const pushToCheckout = () => {
@@ -15,18 +14,18 @@ const CartDropdown = ({ cartItems, history, dispatch }) => {
   };
 
   return (
-    <div className="cart-dropdown">
-      <div className="cart-items">
+    <S.CartDropdown>
+      <S.CartItems>
         {cartItems.length ? (
           cartItems.map(({ id, ...item }) => <CartItem key={id} {...item} />)
         ) : (
-          <span className="empty-message">Your cart is empty</span>
+          <S.EmptyMessage>Your cart is empty</S.EmptyMessage>
         )}
-      </div>
-      <CustomButton onClick={pushToCheckout} inverted>
+      </S.CartItems>
+      <S.CartCustomButton onClick={pushToCheckout} inverted>
         Go To Checkout
-      </CustomButton>
-    </div>
+      </S.CartCustomButton>
+    </S.CartDropdown>
   );
 };
 

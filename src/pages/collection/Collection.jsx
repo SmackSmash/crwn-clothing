@@ -2,19 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { selectCollection } from '../../selectors/shopSelector';
 import CollectionItem from '../../components/collection-item/CollectionItem';
-import './Collection.scss';
+import * as S from './Collection.styled';
 
 const Collection = ({ collection: { title, items } }) => {
   document.title = `CRWN :: Clothing | ${title}`;
   return (
-    <div className="collection-page">
-      <h1 className="title">{title}</h1>
-      <div className="items">
+    <S.CollectionPage>
+      <S.Title>{title}</S.Title>
+      <S.Items>
         {items.map(item => (
           <CollectionItem key={item.id} item={item} />
         ))}
-      </div>
-    </div>
+      </S.Items>
+    </S.CollectionPage>
   );
 };
 
