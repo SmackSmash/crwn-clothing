@@ -33,3 +33,10 @@ export const clearItemFromCart = item => {
     payload: item
   };
 };
+
+export const updateCollections = collections => {
+  return {
+    type: actionTypes.UPDATE_COLLECTIONS,
+    payload: collections
+  };
+};
