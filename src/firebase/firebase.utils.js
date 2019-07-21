@@ -21,12 +21,17 @@ firebase.initializeApp(config);
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
+  // Retreive user from db
   const userRef = firestore.doc(`users/${userAuth.uid}`);
   const snapShot = await userRef.get();
+
+  // Add user to db if user does not exist
   if (!snapShot.exists) {
+    // Assemble user data
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
+    // Add user object to db
     try {
       await userRef.set({
         displayName,
@@ -39,7 +44,19 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     }
   }
 
+  // Return user object if it exists
   return userRef;
+};
+
+// Function to add products to database
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+  const collectionRef = firestore.collection(collectionKey);
+  const batch = firestore.batch();
+  objectsToAdd.forEach(obj => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+  return await batch.commit();
 };
 
 // Export firebase methods for use in app

@@ -12,7 +12,7 @@ import Checkout from './pages/checkout/Checkout';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import './App.scss';
 
-const App = ({ setCurrentUser, currentUser }) => {
+const App = ({ setCurrentUser, currentUser, collections }) => {
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
