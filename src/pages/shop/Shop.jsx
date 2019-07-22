@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { updateCollections } from '../../actions';
-import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
+import { createStructuredSelector } from 'reselect';
+import { selectIsFetching } from '../../selectors/shopSelector';
+import { fetchCollectionsStartAsync } from '../../actions';
 import CollectionsOverview from '../../components/collections-overview/CollectionsOverview';
 import Collection from '../collection/Collection';
 import WithSpinner from '../../components/with-spinner/WithSpinner';
@@ -10,19 +11,12 @@ import WithSpinner from '../../components/with-spinner/WithSpinner';
 const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
 const CollectionWithSpinner = WithSpinner(Collection);
 
-const Shop = ({ match, updateCollections }) => {
+const Shop = ({ match, fetchCollectionsStart, fetchCollectionsStartAsync, loading }) => {
   document.title = 'CRWN :: Clothing | Shop';
 
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
-    const collectionRef = firestore.collection('collections');
-    collectionRef.onSnapshot(async snapshot => {
-      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-      updateCollections(collectionsMap);
-      setLoading(false);
-    });
-  }, [updateCollections]);
+    fetchCollectionsStartAsync();
+  }, [fetchCollectionsStartAsync]);
 
   return (
     <div>
@@ -39,7 +33,11 @@ const Shop = ({ match, updateCollections }) => {
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  loading: selectIsFetching
+});
+
 export default connect(
-  null,
-  { updateCollections }
+  mapStateToProps,
+  { fetchCollectionsStartAsync }
 )(Shop);
